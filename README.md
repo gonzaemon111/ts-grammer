@@ -118,6 +118,46 @@ let obj: { [index: string]: string; } = {
 obj.piyo = 'piyo';  // error
 ```
 
+## 列挙型
+
+```typescript
+enum ename {
+  name
+}
+
+// ename: 列挙型の名前
+// name: 定数
+
+```
+
+列挙型に属する定数を **列挙子** と呼びます。列挙子にはデフォルトで0,1,2, ... と数値が割り振られますので、この例であれば、MALE (0 : 男性)、FEMALE (1 : 女性)、という定数をSexと言う列挙型でまとめたことになります。
+
+```
+列挙型.列挙子
+```
+
+でアクセス可能。
+
+```typescript
+enum Sex {
+  MALE = 1,
+  FEMALE = 2,
+  UNKNOWN = 4
+}
+```
+
+のように、好きなindexを割り振ることも可能。
+
+
+## タプル (tuple)
+
+複数の異なる型の集合を表現するためのデータ型。
+
+```typescript
+let data: [string, number, boolean] = ['hoge', 10.355, false];
+
+console.log(data[0].substring(2));
+```
 
 
 
