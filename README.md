@@ -75,3 +75,33 @@ data2 = 'hoge'; // not error
 
 - 文字列に変数を埋め込める。
 - 複数行にまたがる文字列を表現可能。
+
+## 定数
+
+`const`を使う。
+
+定数は、「再代入できない」であって、「変更できない」
+
+## 配列
+
+```typescript
+let name: type[] = initial
+
+let name: Array<type> = initial
+
+let data: number[] = new Array(5); // サイズ５の空配列
+```
+
+## 連想配列(ハッシュ)
+
+```typescript
+let obj: { [index: string]: string; } = {
+    'hoge': 'ほげ',
+    'foo': 'ふぅ',
+    'bar': 'バァ'
+}
+```
+
+
+
+
