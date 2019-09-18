@@ -159,5 +159,26 @@ let data: [string, number, boolean] = ['hoge', 10.355, false];
 console.log(data[0].substring(2));
 ```
 
+## 型エイリアス
+
+```typescript
+// tuple型にFooTypeと言う名前を付与
+type FooType = [ string, number, boolean ]
+
+// FooType型の変数dataを定義
+let d2: FooType = [ 'abc', 12, true ]
+
+console.log(d2);
+```
+
+このようにtypeを扱うことも可能だが、あまり良しとはされていない。
+
+理由は、その代わりにinterfaceがあるからです。
+
+- interfaceとtypeの違いは、interfaceで定義された名前はどこからでも参照できますが、型エイリアスのそれはそうではありません。
+
+- 型エイリアスは単なる別名であり、継承・実装とした用途には利用できない。
+
+型エイリアスを利用する際は、interfaceで解決できないかを一度考えた方がいい。
 
 
