@@ -209,3 +209,10 @@ let triangle = function(base: number, height: number): number {
 console.log(triable(10, 5))
 ```
 
+### アロー関数
+
+```typescript
+let triangle = (base: number, height: number): number => {
+  return base * height / 2;
+}
+```
