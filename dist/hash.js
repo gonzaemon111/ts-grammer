@@ -3,4 +3,5 @@ var obj = {
     'foo': 'ふぅ',
     'bar': 'バァ'
 };
-console.log(obj.hoge);
+console.log(obj.hoge); // プロパティ構文
+console.log(obj['hoge']); // ブラケット構文
