@@ -100,6 +100,22 @@ let obj: { [index: string]: string; } = {
     'foo': 'ふぅ',
     'bar': 'バァ'
 }
+
+console.log(obj.hoge)  // プロパティ構文
+console.log(obj['hoge'])  // ブラケット構文
+```
+
+しかし、
+
+```typescript
+
+let obj: { [index: string]: string; } = {
+    'hoge': 'ほげ',
+    'foo': 'ふぅ',
+    'bar': 'バァ'
+}
+
+obj.piyo = 'piyo';  // error
 ```
 
 
