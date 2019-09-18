@@ -201,4 +201,11 @@ function name(param: param-type, ...): return-type {
 
 ### 関数リテラル
 
+```typescript
+let triangle = function(base: number, height: number): number {
+  return base * height / 2;
+}
+
+console.log(triable(10, 5))
+```
 
