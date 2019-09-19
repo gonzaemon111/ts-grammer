@@ -425,7 +425,7 @@ Wings.MainApp.foo();
 
 これで`Wings.MainApp`名前空間の配下でHogeクラス/foo関数を定義しなさい、と言う意味になります。呼び出しに際して完全修飾名で表さなければならないのは、先ほどと同じです。
 
-　　別解として、namespaceブロックを入れ子にしても構いません。この場合、内側のnamespaceブロックについても、exportキーワードで修飾する必要があります。
+　　別解として、`namespace`ブロックを入れ子にしても構いません。この場合、内側のnamespaceブロックについても、`export`キーワードで修飾する必要があります。
 
 ```typescript
 namespace Wings {
@@ -436,6 +436,19 @@ namespace Wings {
 }
 ```
 
+## 継承
+
+継承(Inheritance)とは、元にクラスの機能(メンバー)を引き継ぎながら、新しい機能を追加したり、元の機能の一部だけを修正したりすることです。オブジェクト指向構文において、クラスを再利用するもっとも基本的な手段でもあります。
+
+もっとも、従来のJSでクラスを継承するには、プロトタイプ継承と呼ばれる、いささか回りくどい仕組みを利用しなければなりませんでした。
+
+```typescript
+class Person {
+  // 2. protectedメンバーを準備
+  protected name: string;
+  protected sex: string;
+}
+```
 
 
 
