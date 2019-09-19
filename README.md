@@ -375,4 +375,68 @@ console.log(p.show());
 ```
 
 
+## 静的(static)メンバ
+
+静的メンバとは、クラスのオブジェクトに属するメンバではなく、クラスそのものに属するメンバです。
+
+## 名前空間
+
+クラスの数が増えてくると、「クラス名がライブラリ同士、あるいは、ライブラリと利用しているアプリとで競合する」と言う状況が出てきます。
+
+そのような時に、意味的に関連するクラスを束ねる仕組みが、**名前空間**です(Javaを知っている人は、パッケージと同じものと考えれば理解しやすいかもしれません)。
+
+例えば、名前空間を利用することで、「MainApp名前空間に属するHogeクラス」と「SubApp名前空間に属するHogeクラス」と言うように、同名のクラスを名前空間で9月できるようになります。
+
+名前空間を定義するには、以下のようにnamespaceブロックを利用するだけです。
+
+```typescript
+// 1. MainApp 名前空間を定義
+
+namespace MainApp {
+  export class Hoge { ... }
+  export function foo() { ... }
+}
+// 2.名前空間配下の クラス / 関数 を呼びだし
+
+let h = new MainApp.Hoge();
+MainApp.foo();
+```
+
+この例では、`MainApp`名前空間の配下で、hogeクラスとfoo関数を定義しています。名前空間の配下でも、クラス / 関数などの構文はこれまでとほぼ同じですが、一点だけ、exportキーワードを付与している点に注意してください。
+
+TSでは、デフォルトで名前空間配下の要素へのアクセスを許可しません。`export`キーワードで、外からのアクセスが可能であることを明示的に宣言してください。
+
+また、名前空間配下の要素を呼び出す際には、「名前空間.クラス名()」のように完全な名前(完全修飾名)で表す点にも要注意です。例えば、`let h = new Hoge();`のようなコードは`Error`です。(MainApp.HogeとHogeとは別物だからです)。
+
+
+階層的な名前空間
+
+　　より大きなアプリでは、名前空間に階層を設けることも可能です。名前の区切りはドット(.)で表します。
+
+```typescript
+namespace Wings.MainApp {
+  export class Hoge {}
+  export function foo() {}
+}
+
+let h = new Wings.MainApp.Hoge();
+Wings.MainApp.foo();
+```
+
+これで`Wings.MainApp`名前空間の配下でHogeクラス/foo関数を定義しなさい、と言う意味になります。呼び出しに際して完全修飾名で表さなければならないのは、先ほどと同じです。
+
+　　別解として、namespaceブロックを入れ子にしても構いません。この場合、内側のnamespaceブロックについても、exportキーワードで修飾する必要があります。
+
+```typescript
+namespace Wings {
+  export namespace MainApp {
+    export class Hoge {}
+    export function foo() {}
+  }
+}
+```
+
+
+
+
 
