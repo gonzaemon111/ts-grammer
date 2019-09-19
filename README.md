@@ -321,3 +321,58 @@ show(false);
 `typeof`演算子は、プリミティブ型の判定にしか使用できないが、
 `instanceof`演算子は、クラス型の判定ができる。
 ----
+
+
+## オブジェクト指向編 <クラス>
+
+例:
+```typescript
+class Person {
+  name: string;
+  sex: string;
+
+  constructor(name: string, sex: string) {
+    this.name = name;
+    this.sex = sex;
+  }
+
+  show() {
+    return `${this.name}は${this.sex}です。`
+  }
+}
+
+let p = new Person('俺', '男');
+console.log(p.show());
+
+```
+
+### アクセス修飾子
+
+|`public`|`protected`|`private`|
+|:---:|:---:|:---:|
+|クラスの外からも自由にアクセス可能(デフォルト))|同じクラス、またはその派生クラスのメンバーからのみ、アクセス可能。|同じクラスからのみアクセス可能。|
+
+例えば、以下は先ほどのPersonクラスを修正して、`name / sex`プロパティへのクラス外からのアクセスを制限した例です。
+
+
+```typescript
+class Person {
+  private name: string;
+  private sex: string;
+
+  constructor(name: string, sex: string) {
+    this.name = name;
+    this.sex = sex;
+  }
+
+  public show() {
+    return `${this.name}は${this.sex}です。`
+  }
+}
+
+let p = new Person('俺', '男');
+console.log(p.show());
+```
+
+
+
