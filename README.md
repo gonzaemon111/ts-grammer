@@ -216,3 +216,19 @@ let triangle = (base: number, height: number): number => {
   return base * height / 2;
 }
 ```
+
+```typescript
+let Counter = function() {
+  // 現在のthisを退避
+  let _this = this;
+  _this.count = 0;
+  // 1000ミリ秒間隔でcount プロパティをインクリメント
+  setInterval(function() {
+    _this.count++;
+  }, 1000);
+};
+```
+
+Counterコンストラクターの直下では、thisはインスタンス自身をさします。しかし、setIntervalメソッドの配下ではthisは変化してしまい、インスタンスを参照しません(ブラウザ環境であれば、windowオブジェクトを指します)。そこでコンストラクタで`this`を`_this`に待避し、setIntervalメソッドでも`_this`経由でcountプロパティを参照しているのです。
+
+しかし、アロー関数では、thisはアロー関数自身が宣言された場所によって決まります。以下の例であれば、コンストラクタが示すthis(インスタンスそのもの)をさしますので、上の例にあったような`_this`への退避が不要になります。
