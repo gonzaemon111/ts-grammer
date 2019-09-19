@@ -232,3 +232,87 @@ let Counter = function() {
 Counterコンストラクターの直下では、thisはインスタンス自身をさします。しかし、setIntervalメソッドの配下ではthisは変化してしまい、インスタンスを参照しません(ブラウザ環境であれば、windowオブジェクトを指します)。そこでコンストラクタで`this`を`_this`に待避し、setIntervalメソッドでも`_this`経由でcountプロパティを参照しているのです。
 
 しかし、アロー関数では、thisはアロー関数自身が宣言された場所によって決まります。以下の例であれば、コンストラクタが示すthis(インスタンスそのもの)をさしますので、上の例にあったような`_this`への退避が不要になります。
+
+## 引数にデフォルト値を設定する。
+
+先ほどの例でも見たように、引数を省略した場合、大概は何らかのデフォルト値を設定するのが一般的です。
+
+例
+```typescript
+function showTime(time: Date = new Date()): string {
+  // 引数にそのまま「=」を使って明示する。
+}
+```
+
+しかし、注意する点がいくつかある。
+
+1. **任意引数** の後ろに **必須引数** は配置できない。
+
+```typescript
+function add(x: number = 1, y: number): string { ... }
+```
+
+これ自体では、エラーにならないものの、`add(1)`とした場合に、`y`も必須引数とみなされ、エラーになってしまう。
+
+2. デフォルト値には、**式**も指定できる。
+
+例: 
+```typescript
+function add(x: number = 1, y: number = x): string { ... }
+```
+
+3. 引数に`undefined`を指定した場合
+
+デフォルト値が適用されるのは、引数を省略した場合だけではありません。
+
+`undefined`を明示的に指定した場合にも、引数は省略されたとみなされます。
+
+ちなみに、`null`を指定した場合には、デフォルト値は適用されません。`null`は`undefined`とは異なり、`null`は「値がない」であり、`undefined`は「未定義値」と言う意味である。
+
+## 可変長引数
+
+例を見た方がわかりやすいので、そうしましょう。
+
+例: 
+```typescript
+function sum(...values: number[]): number {
+  let result: number = 0;
+  
+  for (let value of values) {
+    result += value;
+  }
+
+  return result;
+}
+
+console.log(sum(1, 5, -8, 10.45));
+```
+
+`...`を使うことで、可変長の引数であることが示されます。
+
+## 関数のオーバーロード
+
+オーバーロードとは、同じ名前でありながら、引数リスト、戻り値の型が異なる関数を定義することを言います。Javaなどの他の言語では、「オーバーライド」などと表現されます。
+
+以下の例を見てみましょう。
+
+```typescript
+function show(value: number): void;
+function show(value: boolean): void;
+
+function show(value: any): void {
+  if (typeof value === 'number'){
+    console.log(value.toFixed(0));
+  } else {
+    console.log(value ? '真' : '偽');
+  }
+}
+
+show(10.358);
+show(false);
+// show('hoge'); error
+```
+
+最初の２行は、**シグニチャ**といい、戻り値の型の後にセミコロン(;)だけを書きます。
+
+
